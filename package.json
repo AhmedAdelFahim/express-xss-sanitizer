@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/AhmedAdelFahim/express-xss-sanitizer/issues"
   },
-  "homepage": "https://github.com/AhmedAdelFahim/express-xss-sanitizer",
+  "homepage": "https://github.com/AhmedAdelFahim/express-xss-sanitizer#readme",
   "dependencies": {
     "sanitize-html": "^2.1.2"
   },
