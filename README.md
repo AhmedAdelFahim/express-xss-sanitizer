@@ -1,6 +1,7 @@
 # Express XSS Sanitizer
 Express 4.x middleware which sanitizes user input data (in req.body, req.query, req.headers and req.params) to prevent Cross Site Scripting (XSS) attack.
 
+![GitHub](https://img.shields.io/github/license/ahmedadelfahim/express-xss-sanitizer)
 ## Installation
 ```
 npm install express-xss-sanitizer
