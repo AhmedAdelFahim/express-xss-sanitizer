@@ -1,9 +1,13 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable func-names */
+/* eslint-disable no-undef */
+
 "use strict";
 
 const request = require("supertest");
 const express = require("express");
 const bodyParser = require("body-parser");
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const sanitize = require("../index");
 
 describe("Express xss Sanitize", function () {
@@ -50,7 +54,7 @@ describe("Express xss Sanitize", function () {
                 a: "<p>Test</p>",
               },
             },
-            done
+            done,
           );
       });
 
@@ -88,7 +92,7 @@ describe("Express xss Sanitize", function () {
                 a: "<p>Test</p>",
               },
             },
-            done
+            done,
           );
       });
 
@@ -109,14 +113,14 @@ describe("Express xss Sanitize", function () {
                 c: "",
               },
             },
-            done
+            done,
           );
       });
 
       it("should sanitize dirty query.", function (done) {
         request(app)
           .get(
-            '/query?a=<script>Test</script>&b=<p onclick="return;">Test</p>&c=<img src="/"/>'
+            '/query?a=<script>Test</script>&b=<p onclick="return;">Test</p>&c=<img src="/"/>',
           )
           .expect(
             200,
@@ -199,26 +203,9 @@ describe("Express xss Sanitize", function () {
                 },
               },
             },
-            done
+            done,
           );
       });
-
-      /*
-
-
-      it('should sanitize clean query.', function (done) {
-        request(app).get('/query?y=4&z=false&w=bla bla&a=<p>Test</p>')
-          .expect(200, {
-            query: {
-              y: "4",
-              z: "false",
-              w: 'bla bla',
-              a: '<p>Test</p>'
-            }
-          }, done)
-      });
-
-      */
 
       it("should sanitize dirty body.", function (done) {
         request(app)
@@ -270,37 +257,9 @@ describe("Express xss Sanitize", function () {
                 },
               },
             },
-            done
+            done,
           );
       });
-
-      /*
-      it('should sanitize dirty query.', function (done) {
-        request(app).get('/query?a=<script>Test</script>&b=<p onclick="return;">Test</p>&c=<img src="/"/>')
-          .expect(200, {
-            query: {
-              a: '',
-              b: '<p>Test</p>',
-              c: ''
-            }
-          }, done)
-      });
-
-      it('should sanitize dirty headers.', function (done) {
-        request(app).post('/headers').set({
-          a: '<script>Test</script>',
-          b: '<p onclick="return;">Test</p>',
-          c: '<img src="/"/>'
-        }).expect(200)
-          .expect(function (res) {
-            expect(res.body.headers).to.include({
-              a: '',
-              b: '<p>Test</p>',
-              c: ''
-            })
-          })
-          .end(done);
-      });*/
     });
   });
 });

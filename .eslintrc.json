@@ -20,6 +20,7 @@
         "comma-dangle": "error",
         "prettier/prettier": ["error"],
         "quotes": "off",
-        "strict": "off"
+        "strict": "off",
+        "prefer-arrow-callback":"off"
     }
 }
