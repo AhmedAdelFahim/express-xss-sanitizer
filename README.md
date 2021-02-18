@@ -35,5 +35,19 @@ const options = {
 
 app.use(xss(options));
 ```
+Add as a piece of express middleware, before single route.
+```
+const express = require('express');
+const bodyParser = require('body-parser');
+const xss = require('express-xss-sanitizer');
+
+const app = express();
+
+app.use(bodyParser.json({limit:'1kb'}));
+app.use(bodyParser.urlencoded({extended: true, limit:'1kb'}));
+app.post("/body", sanitize(), function (req, res) {
+      // your code
+});
+```
 ## Support
 Feel free to open issues on [github](https://github.com/AhmedAdelFahim/express-xss-sanitizer.git).
