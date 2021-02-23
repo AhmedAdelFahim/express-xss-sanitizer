@@ -45,7 +45,11 @@ const app = express();
 
 app.use(bodyParser.json({limit:'1kb'}));
 app.use(bodyParser.urlencoded({extended: true, limit:'1kb'}));
-app.post("/body", sanitize(), function (req, res) {
+app.post("/body", xss(), function (req, res) {
+      // your code
+});
+
+app.post("/test", function (req, res) {
       // your code
 });
 ```

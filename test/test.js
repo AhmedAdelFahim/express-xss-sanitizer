@@ -267,7 +267,6 @@ describe("Express xss Sanitize", function () {
     const app = express();
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
-    // app.use(sanitize());
 
     app.post("/body", sanitize(), function (req, res) {
       res.status(200).json({
