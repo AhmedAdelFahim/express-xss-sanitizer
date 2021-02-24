@@ -1,17 +1,17 @@
 # Express XSS Sanitizer
 Express 4.x middleware which sanitizes user input data (in req.body, req.query, req.headers and req.params) to prevent Cross Site Scripting (XSS) attack.
 
-![GitHub](https://img.shields.io/github/license/ahmedadelfahim/express-xss-sanitizer)
+![GitHub](https://img.shields.io/github/license/ahmedadelfahim/express-xss-sanitizer) ![npm](https://img.shields.io/npm/v/express-xss-sanitizer) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/express-xss-sanitizer) ![npm](https://img.shields.io/npm/dt/express-xss-sanitizer)
 ## Installation
-```
-npm install express-xss-sanitizer
+```bash
+$ npm install express-xss-sanitizer
 ```
 ## Usage
 Add as a piece of express middleware, before defining your routes.
 ```
 const express = require('express');
 const bodyParser = require('body-parser');
-const xss = require('express-xss-sanitizer');
+const { xss } = require('express-xss-sanitizer');
 
 const app = express();
 
@@ -39,7 +39,7 @@ Add as a piece of express middleware, before single route.
 ```
 const express = require('express');
 const bodyParser = require('body-parser');
-const xss = require('express-xss-sanitizer');
+const { xss } = require('express-xss-sanitizer');
 
 const app = express();
 
@@ -52,6 +52,22 @@ app.post("/body", xss(), function (req, res) {
 app.post("/test", function (req, res) {
       // your code
 });
+```
+You also can sanitize your data (object, array, string,etc) on the fly.
+```
+const { sanitize } = require('express-xss-sanitizer');
+
+// ...
+      data = sanitize(data)
+// or
+      data = sanitize(data, {allowedKeys: ['name']})
+// ...
+```
+## Tests
+To run the test suite, first install the dependencies, then run `npm test`:
+```bash
+$ npm install
+$ npm test
 ```
 ## Support
 Feel free to open issues on [github](https://github.com/AhmedAdelFahim/express-xss-sanitizer.git).
