@@ -266,8 +266,7 @@ describe("Express xss Sanitize", function () {
   describe("Sanitize with custom options as middleware before all routes", function () {
     const app = express();
     const options = {
-      allowedKeys: ['c'],
-
+      allowedKeys: ["c"],
     };
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
@@ -775,7 +774,7 @@ describe("Express xss Sanitize", function () {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
 
-    app.post("/body", xss({ allowedKeys: ['c'] }), function (req, res) {
+    app.post("/body", xss({ allowedKeys: ["c"] }), function (req, res) {
       res.status(200).json({
         body: req.body,
       });
@@ -1056,26 +1055,28 @@ describe("Express xss Sanitize", function () {
 
     describe("Sanitize complex object", function () {
       it("should sanitize clean body.", function (done) {
-        expect(sanitize({
-          y: 4,
-          z: false,
-          w: "bla bla",
-          a: "<p>Test</p>",
-          arr: [
-            "<h1>H1 Test</h1>",
-            "bla bla",
-            {
-              i: ["<h3>H3 Test</h3>", "bla bla", false, 5],
-              j: '<a href="/">Link</a>',
+        expect(
+          sanitize({
+            y: 4,
+            z: false,
+            w: "bla bla",
+            a: "<p>Test</p>",
+            arr: [
+              "<h1>H1 Test</h1>",
+              "bla bla",
+              {
+                i: ["<h3>H3 Test</h3>", "bla bla", false, 5],
+                j: '<a href="/">Link</a>',
+              },
+            ],
+            obj: {
+              e: "Test1",
+              r: {
+                a: "<h6>H6 Test</h6>",
+              },
             },
-          ],
-          obj: {
-            e: "Test1",
-            r: {
-              a: "<h6>H6 Test</h6>",
-            },
-          },
-        })).to.eql({
+          }),
+        ).to.eql({
           y: 4,
           z: false,
           w: "bla bla",
@@ -1099,30 +1100,32 @@ describe("Express xss Sanitize", function () {
       });
 
       it("should sanitize dirty body.", function (done) {
-        expect(sanitize({
-          a: "<script>Test</script>",
-          b: '<p onclick="return;">Test</p>',
-          c: '<img src="/"/>',
-          arr: [
-            "<h1 onclick='return false;'>H1 Test</h1>",
-            "bla bla",
-            {
-              i: [
-                "<h3 onclick='function x(e) {console.log(e); return;}'>H3 Test</h3>",
-                "bla bla",
-                false,
-                5,
-              ],
-              j: '<a href="/" onclick="return 0;">Link</a>',
+        expect(
+          sanitize({
+            a: "<script>Test</script>",
+            b: '<p onclick="return;">Test</p>',
+            c: '<img src="/"/>',
+            arr: [
+              "<h1 onclick='return false;'>H1 Test</h1>",
+              "bla bla",
+              {
+                i: [
+                  "<h3 onclick='function x(e) {console.log(e); return;}'>H3 Test</h3>",
+                  "bla bla",
+                  false,
+                  5,
+                ],
+                j: '<a href="/" onclick="return 0;">Link</a>',
+              },
+            ],
+            obj: {
+              e: '<script>while (true){alert("Test To OO")}</script>',
+              r: {
+                a: "<h6>H6 Test</h6>",
+              },
             },
-          ],
-          obj: {
-            e: '<script>while (true){alert("Test To OO")}</script>',
-            r: {
-              a: "<h6>H6 Test</h6>",
-            },
-          },
-        })).to.eql({
+          }),
+        ).to.eql({
           a: "",
           b: "<p>Test</p>",
           c: "",
@@ -1144,6 +1147,15 @@ describe("Express xss Sanitize", function () {
         done();
       });
     });
+
+    describe("Sanitize null value", function () {
+      it("should return null.", function (done) {
+        expect(
+          sanitize(null),
+        ).to.eql(null);
+        done();
+      });
+    });
   });
 
   describe("Sanitize data with custom options as function", function () {
@@ -1153,7 +1165,7 @@ describe("Express xss Sanitize", function () {
           a: "<script>Test</script>",
           b: '<p onclick="return;">Test</p>',
           c: '<img src="/"/>',
-        }, { allowedKeys: ['c'] })).to.eql({
+        }, { allowedKeys: ["c"] })).to.eql({
           a: "",
           b: "<p>Test</p>",
           c: '<img src="/"/>',
@@ -1187,7 +1199,7 @@ describe("Express xss Sanitize", function () {
               a: "<h6>H6 Test</h6>",
             },
           },
-        }, { allowedKeys: ['e'] })).to.eql({
+        }, { allowedKeys: ["e"] })).to.eql({
           a: "",
           b: "<p>Test</p>",
           c: "",
