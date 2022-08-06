@@ -63,6 +63,9 @@ const { sanitize } = require('express-xss-sanitizer');
       data = sanitize(data, {allowedKeys: ['name']})
 // ...
 ```
+## For other frameworks
+ * [koa-xss-sanitizer](https://www.npmjs.com/package/koa-xss-sanitizer)
+
 ## Tests
 To run the test suite, first install the dependencies, then run `npm test`:
 ```bash

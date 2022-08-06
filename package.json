@@ -12,6 +12,7 @@
   },
   "keywords": [
     "express",
+    "koa",
     "middleware",
     "sanitizer",
     "xss",
