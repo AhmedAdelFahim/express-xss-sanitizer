@@ -21,6 +21,7 @@
         "prettier/prettier": ["error"],
         "quotes": "off",
         "strict": "off",
-        "prefer-arrow-callback":"off"
+        "prefer-arrow-callback":"off",
+        "operator-linebreak": "off"
     }
 }

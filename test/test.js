@@ -1222,4 +1222,34 @@ describe("Express xss Sanitize", function () {
       });
     });
   });
+
+  describe("Sanitize data with custom options as function", function () {
+    describe("Sanitize simple object", function () {
+      it("should sanitize dirty body.", function (done) {
+        expect(sanitize({
+          a: "<script>Test</script>",
+          b: '<p onclick="return;">Test</p>',
+          c: '<img src="/"/>',
+        }, { allowedKeys: ["c"] })).to.eql({
+          a: "",
+          b: "<p>Test</p>",
+          c: '<img src="/"/>',
+        });
+        done();
+      });
+    });
+
+    describe("XSS bypass by using prototype pollution issue", function () {
+      it("should sanitize dirty data after prototype pollution.", function (done) {
+        // eslint-disable-next-line no-extend-native
+        Object.prototype.allowedTags = ['script'];
+        expect(sanitize({
+          a: "<script>Test</script>",
+        }, {})).to.eql({
+          a: "",
+        });
+        done();
+      });
+    });
+  });
 });
