@@ -6,10 +6,6 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha "
   },
-  "engines": {
-    "node": ">=16.9.0"
-  },
-  "engineStrict": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/AhmedAdelFahim/express-xss-sanitizer.git"
