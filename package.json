@@ -1,15 +1,11 @@
 {
   "name": "express-xss-sanitizer",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "Express 4.x middleware which sanitizes user input data (in req.body, req.query, req.headers and req.params) to prevent Cross Site Scripting (XSS) attack.",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha "
   },
-  "engines": {
-    "node": ">=16.9.0"
-  },
-  "engineStrict": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/AhmedAdelFahim/express-xss-sanitizer.git"
