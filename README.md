@@ -6,8 +6,6 @@ Express 4.x middleware which sanitizes user input data (in req.body, req.query, 
 ```bash
 $ npm install express-xss-sanitizer
 ```
-## Version Compatibility
-* Express XSS Sanitizer v1.1.3 or above need node v16.9.0 or above
 ## Usage
 Add as a piece of express middleware, before defining your routes.
 ```
