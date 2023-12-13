@@ -1174,6 +1174,27 @@ describe("Express xss Sanitize", function () {
       });
     });
 
+    describe("Sanitize complex object with attributes", function () {
+      it("should sanitize but keep asked attributes.", function (done) {
+        expect(
+          sanitize(
+            {
+              d: '<input value="some value" class="test-class" />',
+            },
+            {
+              allowedTags: ['input'],
+              allowedAttributes: {
+                input: ["value"],
+              },
+            }
+          )
+        ).to.eql({
+          d: '<input value="some value" />'
+        });
+        done();
+      });
+    });
+
     describe("Sanitize complex object", function () {
       it("should sanitize dirty body.", function (done) {
         expect(sanitize({
