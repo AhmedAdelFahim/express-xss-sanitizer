@@ -19,10 +19,13 @@ app.use(bodyParser.json({limit:'1kb'}));
 app.use(bodyParser.urlencoded({extended: true, limit:'1kb'}));
 app.use(xss());
 ```
-You can add options to specify allowed keys to be skipped at sanitization
+You can add options to specify allowed keys or allowed attributes to be skipped at sanitization
 ```
 const options = {
-   allowedKeys: ['name']
+   allowedKeys: ['name'],
+   allowedAttributes: {
+         input: ['value'],
+   },
 }
 
 app.use(xss(options));
