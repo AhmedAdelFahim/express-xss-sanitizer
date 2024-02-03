@@ -1,7 +1,12 @@
 # Express XSS Sanitizer
 Express 4.x middleware which sanitizes user input data (in req.body, req.query, req.headers and req.params) to prevent Cross Site Scripting (XSS) attack.
 
-![GitHub](https://img.shields.io/github/license/ahmedadelfahim/express-xss-sanitizer) ![npm](https://img.shields.io/npm/v/express-xss-sanitizer) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/express-xss-sanitizer) ![npm](https://img.shields.io/npm/dt/express-xss-sanitizer)
+[![Build Status](https://img.shields.io/github/forks/AhmedAdelFahim/express-xss-sanitizer.svg?style=for-the-badge)](https://github.com/AhmedAdelFahim/express-xss-sanitizer)
+[![Build Status](https://img.shields.io/github/stars/AhmedAdelFahim/express-xss-sanitizer.svg?style=for-the-badge)](https://github.com/AhmedAdelFahim/express-xss-sanitizer)
+[![Latest Stable Version](https://img.shields.io/npm/v/express-xss-sanitizer.svg?style=for-the-badge)](https://www.npmjs.com/package/express-xss-sanitizer)
+[![License](https://img.shields.io/npm/l/express-xss-sanitizer.svg?style=for-the-badge)](https://www.npmjs.com/package/express-xss-sanitizer)
+[![NPM Downloads](https://img.shields.io/npm/dt/express-xss-sanitizer.svg?style=for-the-badge)](https://www.npmjs.com/package/express-xss-sanitizer)
+[![NPM Downloads](https://img.shields.io/npm/dm/express-xss-sanitizer.svg?style=for-the-badge)](https://www.npmjs.com/package/express-xss-sanitizer)
 ## Installation
 ```bash
 $ npm install express-xss-sanitizer
