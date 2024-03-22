@@ -1,6 +1,6 @@
 {
   "name": "express-xss-sanitizer",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "Express 4.x middleware which sanitizes user input data (in req.body, req.query, req.headers and req.params) to prevent Cross Site Scripting (XSS) attack.",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/AhmedAdelFahim/express-xss-sanitizer#readme",
   "dependencies": {
-    "sanitize-html": "~2.11.0"
+    "sanitize-html": "~2.13.0"
   },
   "devDependencies": {
     "body-parser": "^1.19.0",
