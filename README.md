@@ -13,7 +13,7 @@ $ npm install express-xss-sanitizer
 ```
 ## Usage
 Add as a piece of express middleware, before defining your routes.
-```
+```javascript
 const express = require('express');
 const bodyParser = require('body-parser');
 const { xss } = require('express-xss-sanitizer');
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true, limit:'1kb'}));
 app.use(xss());
 ```
 You can add options to specify allowed keys or allowed attributes to be skipped at sanitization
-```
+```javascript
 const options = {
    allowedKeys: ['name'],
    allowedAttributes: {
@@ -36,7 +36,7 @@ const options = {
 app.use(xss(options));
 ```
 You can add options to specify allowed tags to sanitize it and remove other tags
-```
+```javascript
 const options = {
    allowedTags: ['h1']
 }
@@ -44,7 +44,7 @@ const options = {
 app.use(xss(options));
 ```
 Add as a piece of express middleware, before single route.
-```
+```javascript
 const express = require('express');
 const bodyParser = require('body-parser');
 const { xss } = require('express-xss-sanitizer');
@@ -62,7 +62,7 @@ app.post("/test", function (req, res) {
 });
 ```
 You also can sanitize your data (object, array, string,etc) on the fly.
-```
+```javascript
 const { sanitize } = require('express-xss-sanitizer');
 
 // ...
