@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable prettier/prettier */
 /* eslint-disable func-names */
 /* eslint-disable no-undef */
