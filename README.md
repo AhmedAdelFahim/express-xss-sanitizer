@@ -61,6 +61,22 @@ app.post("/test", function (req, res) {
       // your code
 });
 ```
+__Note:__ if you adding xxs() as application level middleware, the xxs() will sanitize req.body, req.headers and req.query only and for req.params you must add xxs() as route level middleware like below example.
+
+```javascript
+const express = require('express');
+const bodyParser = require('body-parser');
+const { xss } = require('express-xss-sanitizer');
+
+const app = express();
+
+app.use(bodyParser.json({limit:'1kb'}));
+app.use(bodyParser.urlencoded({extended: true, limit:'1kb'}));
+app.post("/params/:val", xss(), function (req, res) {
+      // your code
+});
+
+```
 You also can sanitize your data (object, array, string,etc) on the fly.
 ```javascript
 const { sanitize } = require('express-xss-sanitizer');
