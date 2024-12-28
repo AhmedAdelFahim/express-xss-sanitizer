@@ -124,6 +124,19 @@ describe('Express xss Sanitize', function () {
             );
         });
 
+        it('should sanitize empty query.', function (done) {
+          request(app)
+            .get('/query')
+            .expect(
+              200,
+              {
+                query: {
+                },
+              },
+              done,
+            );
+        });
+
         it('should sanitize dirty params.', function (done) {
           request(app)
             .post(`/params-route-level/${encodeURIComponent('<script>Test</script>')}`)
