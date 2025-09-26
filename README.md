@@ -24,6 +24,14 @@ app.use(bodyParser.json({limit:'1kb'}));
 app.use(bodyParser.urlencoded({extended: true, limit:'1kb'}));
 app.use(xss());
 ```
+You can add options to control max number of recursion at sanitization to prevent DOS attacks.
+```javascript
+const options = {
+   maxDepth: 50, // default 100
+}
+
+app.use(xss(options));
+```
 You can add options to specify allowed keys or allowed attributes to be skipped at sanitization
 ```javascript
 const options = {
@@ -96,5 +104,12 @@ To run the test suite, first install the dependencies, then run `npm test`:
 $ npm install
 $ npm test
 ```
+## Security
+
+### Reporting Vulnerabilities
+Please report security issues to [ahmedadelfahim@gmail.com](mailto:ahmedadelfahim@gmail.com)
+
+### Security Updates
+- **v2.0.1**: Fixed unbounded recursion depth vulnerability (CVE-2025-59364)
 ## Support
 Feel free to open issues on [github](https://github.com/AhmedAdelFahim/express-xss-sanitizer.git).

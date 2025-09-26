@@ -1,6 +1,6 @@
 {
   "name": "express-xss-sanitizer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Express 4.x and 5.x middleware which sanitizes user input data (in req.body, req.query, req.headers and req.params) to prevent Cross Site Scripting (XSS) attack.",
   "main": "index.js",
   "scripts": {

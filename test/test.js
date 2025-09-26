@@ -16,7 +16,7 @@ describe('Express xss Sanitize', function () {
     const app = express();
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
-    app.use(xss());
+    app.use(xss({ maxDepth: 100 }));
 
     app.post('/body', function (req, res) {
       res.status(200).json({
@@ -316,6 +316,7 @@ describe('Express xss Sanitize', function () {
       const app = express();
       const options = {
         allowedKeys: ['c'],
+        maxDepth: 100,
       };
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(bodyParser.json());
@@ -565,7 +566,7 @@ describe('Express xss Sanitize', function () {
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(bodyParser.json());
 
-      app.post('/body', xss(), function (req, res) {
+      app.post('/body', xss({ maxDepth: 100 }), function (req, res) {
         res.status(200).json({
           body: req.body,
         });
@@ -809,7 +810,7 @@ describe('Express xss Sanitize', function () {
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(bodyParser.json());
 
-      app.post('/body', xss({ allowedKeys: ['c'] }), function (req, res) {
+      app.post('/body', xss({ allowedKeys: ['c'], maxDepth: 100 }), function (req, res) {
         res.status(200).json({
           body: req.body,
         });
@@ -1059,7 +1060,7 @@ describe('Express xss Sanitize', function () {
               z: false,
               w: 'bla bla',
               a: '<p>Test</p>',
-            }),
+            }, { maxDepth: 100 }),
           ).to.eql({
             y: 4,
             z: false,
@@ -1075,7 +1076,7 @@ describe('Express xss Sanitize', function () {
               a: '<script>Test</script>',
               b: '<p onclick="return;">Test</p>',
               c: '<img src="/"/>',
-            }),
+            }, { maxDepth: 100 }),
           ).to.eql({
             a: '',
             b: '<p>Test</p>',
@@ -1107,7 +1108,7 @@ describe('Express xss Sanitize', function () {
                   a: '<h6>H6 Test</h6>',
                 },
               },
-            }),
+            }, { maxDepth: 100 }),
           ).to.eql({
             y: 4,
             z: false,
@@ -1151,7 +1152,7 @@ describe('Express xss Sanitize', function () {
                   a: '<h6>H6 Test</h6>',
                 },
               },
-            }),
+            }, { maxDepth: 100 }),
           ).to.eql({
             a: '',
             b: '<p>Test</p>',
@@ -1193,7 +1194,7 @@ describe('Express xss Sanitize', function () {
                 b: '<p onclick="return;">Test</p>',
                 c: '<img src="/"/>',
               },
-              { allowedKeys: ['c'] },
+              { allowedKeys: ['c'], maxDepth: 100 },
             ),
           ).to.eql({
             a: '',
@@ -1217,6 +1218,7 @@ describe('Express xss Sanitize', function () {
                   input: ['value'],
                 },
               },
+              { maxDepth: 100 },
             ),
           ).to.eql({
             d: '<input value="some value" />',
@@ -1248,7 +1250,7 @@ describe('Express xss Sanitize', function () {
                   },
                 },
               },
-              { allowedKeys: ['e'] },
+              { allowedKeys: ['e'], maxDepth: 100 },
             ),
           ).to.eql({
             a: '',
