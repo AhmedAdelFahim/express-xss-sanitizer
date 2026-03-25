@@ -1274,6 +1274,76 @@ describe('Express xss Sanitize', function () {
           done();
         });
       });
+
+      describe('Sanitize complex object with disallowed tags or attributes', function () {
+        it('should remove all tags.', function (done) {
+          expect(
+            sanitize(
+              {
+                a: '<script>Test</script>',
+                b: '<p onclick="return;">Test</p>',
+                c: '<img src="/"/>',
+                arr: [
+                  "<h1 onclick='return false;'>H1 Test</h1>",
+                  'bla bla',
+                  {
+                    i: ["<h3 onclick='function x(e) {console.log(e); return;}'>H3 Test</h3>", 'bla bla', false, 5],
+                    j: '<a href="/" onclick="return 0;">Link</a>',
+                  },
+                ],
+              },
+              { allowedTags: [] },
+            ),
+          ).to.eql({
+            a: '',
+            b: 'Test',
+            c: '',
+            arr: [
+              'H1 Test',
+              'bla bla',
+              {
+                i: ['H3 Test', 'bla bla', false, 5],
+                j: 'Link',
+              },
+            ],
+          });
+          done();
+        });
+
+        it('should remove all attributes.', function (done) {
+          expect(
+            sanitize(
+              {
+                a: '<script>Test</script>',
+                b: '<p onclick="return;">Test</p>',
+                c: '<img src="/"/>',
+                arr: [
+                  "<h1 onclick='return false;'>H1 Test</h1>",
+                  'bla bla',
+                  {
+                    i: ["<h3 onclick='function x(e) {console.log(e); return;}'>H3 Test</h3>", 'bla bla', false, 5],
+                    j: '<a href="/" onclick="return 0;">Link</a>',
+                  },
+                ],
+              },
+              { allowedAttributes: {} },
+            ),
+          ).to.eql({
+            a: '',
+            b: '<p>Test</p>',
+            c: '',
+            arr: [
+              "<h1>H1 Test</h1>",
+              'bla bla',
+              {
+                i: ["<h3>H3 Test</h3>", 'bla bla', false, 5],
+                j: '<a>Link</a>',
+              },
+            ],
+          });
+          done();
+        });
+      });
     });
 
     describe('Sanitize data with custom options as function', function () {
